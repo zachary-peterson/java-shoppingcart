@@ -6,7 +6,7 @@ A Student that completes this project shows they can:
 * read user information from the access token
 * understand the issues related to CORS and implement solutions to those issues
 * understand how to implement a new user and logout endpoints
-* use Postman to manually test Web APIs using Authentication
+* use Postman to manually test Web APIs using Authentication      
 
 ## Introduction
 
