@@ -24,6 +24,7 @@ public class CartController
     @Autowired
     private CartService cartService;
 
+    // http://localhost:2019/carts/user
     @GetMapping(value = "/user", produces = {"application/json"})
     public ResponseEntity<?> listAllCarts(@PathVariable long userid)
     {
@@ -31,6 +32,7 @@ public class CartController
         return new ResponseEntity<>(myCarts, HttpStatus.OK);
     }
 
+    // http://localhost:2019/carts/cart/1
     @GetMapping(value = "/cart/{cartId}",
             produces = {"application/json"})
     public ResponseEntity<?> getCartById(
@@ -42,6 +44,7 @@ public class CartController
                                     HttpStatus.OK);
     }
 
+    // POST http://localhost:2019/carts/create/user/1/product/1
     @PostMapping(value = "/create/user/{userid}/product/{productid}")
     public ResponseEntity<?> addNewCart(@PathVariable long userid,
                                         @PathVariable long productid)
@@ -56,6 +59,7 @@ public class CartController
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // PUT http://localhost:2019/carts/update/cart/1/product/1
     @PutMapping(value = "/update/cart/{cartid}/product/{productid}")
     public ResponseEntity<?> updateCart(@PathVariable long cartid,
                                         @PathVariable long productid)
@@ -70,6 +74,7 @@ public class CartController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // DELETE http://localhost:2019/carts/delete/cart/1/product/1
     @DeleteMapping(value = "/delete/cart/{cartid}/product/{productid}")
     public ResponseEntity<?> deleteFromCart(@PathVariable long cartid,
                                             @PathVariable long productid)

@@ -27,6 +27,7 @@ public class ProductController
     @Autowired
     private ProductService productService;
 
+    // http://localhost:2019/products/products
     @GetMapping(value = "/products", produces = {"application/json"})
     public ResponseEntity<?> listAllProducts()
     {
@@ -34,6 +35,7 @@ public class ProductController
         return new ResponseEntity<>(myProducts, HttpStatus.OK);
     }
 
+    // http://localhost:2019/products/product/1
     @GetMapping(value = "/product/{productId}",
             produces = {"application/json"})
     public ResponseEntity<?> getProductById(
@@ -45,6 +47,7 @@ public class ProductController
                                     HttpStatus.OK);
     }
 
+    // POST http://localhost:2019/products/product
     @PostMapping(value = "/product")
     public ResponseEntity<?> addProduct(@Valid @RequestBody Product newproduct)
     {
@@ -64,6 +67,7 @@ public class ProductController
                                     HttpStatus.CREATED);
     }
 
+    // PUT http://localhost:2019/products/product/1
     @PutMapping(value = "/product/{productid}")
     public ResponseEntity<?> updateProductById(
             @RequestBody Product updateProduct,
@@ -73,6 +77,7 @@ public class ProductController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // DELETE http://localhost:2019/products/product/1
     @DeleteMapping(value = "/product/{productid}")
     public ResponseEntity<?> getProductById(
             @PathVariable long productid)
