@@ -46,6 +46,20 @@ public class UserServiceImpl
                 .orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
     }
 
+    @Override
+    public User findByUsername(String name)
+    {
+        User found = userrepos.findByUsername(name);
+
+        if (found == null)
+        {
+            throw new ResourceNotFoundException("User with name " + name + " not found");
+        } else
+        {
+            return found;
+        }
+    }
+
     @Transactional
     @Override
     public void delete(long id)
