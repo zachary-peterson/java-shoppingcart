@@ -27,10 +27,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         http.logout().disable();
 
         http.authorizeRequests()
-            .antMatchers("/", "/h2-console/**").permitAll()
+            .antMatchers("/", "/login", "/h2-console/**").permitAll()
             .antMatchers("/cart/user").authenticated()
             .antMatchers("/cart/**").hasAnyRole("ADMIN")
-            .antMatchers("/users/**").hasAnyRole("ADMIN", "EDIT")
+            .antMatchers("/users/**").hasAnyRole("ADMIN", "USER")
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());

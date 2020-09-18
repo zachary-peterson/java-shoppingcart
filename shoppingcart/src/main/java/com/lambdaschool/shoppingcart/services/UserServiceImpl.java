@@ -2,7 +2,9 @@ package com.lambdaschool.shoppingcart.services;
 
 import com.lambdaschool.shoppingcart.exceptions.ResourceFoundException;
 import com.lambdaschool.shoppingcart.exceptions.ResourceNotFoundException;
+import com.lambdaschool.shoppingcart.models.Role;
 import com.lambdaschool.shoppingcart.models.User;
+import com.lambdaschool.shoppingcart.models.UserRoles;
 import com.lambdaschool.shoppingcart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class UserServiceImpl
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public List<User> findAll()
@@ -75,8 +80,25 @@ public class UserServiceImpl
     {
         User newUser = new User();
 
-        newUser.setUsername(user.getUsername());
+        if (user.getUserid() != 0)
+        {
+            userrepos.findById(user.getUserid())
+                .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
+            newUser.setUserid(user.getUserid());
+        }
+
+        newUser.setUsername(user.getUsername().toLowerCase());
+        newUser.setNoEncodePassword(user.getPassword());
         newUser.setComments(user.getComments());
+
+        newUser.getRoles().clear();
+        for (UserRoles userRole : user.getRoles())
+        {
+            Role addRole = roleService.findRoleById(userRole.getRole()
+                .getRoleid());
+            newUser.getRoles()
+                .add(new UserRoles());
+        }
 
         if (user.getCarts()
                 .size() > 0)

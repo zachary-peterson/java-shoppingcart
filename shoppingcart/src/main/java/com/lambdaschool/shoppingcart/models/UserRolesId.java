@@ -51,7 +51,6 @@ public class UserRolesId implements Serializable
             return false;
         }
         UserRolesId that = (UserRolesId) obj;
-        return user == that.user &&
-            role == that.role;
+        return (this.user == that.getUser()) && (this.role == that.getRole());
     }
 }

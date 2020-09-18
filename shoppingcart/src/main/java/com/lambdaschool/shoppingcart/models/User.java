@@ -56,6 +56,16 @@ public class User
 
     }
 
+    public User(
+        String username,
+        String password,
+        String comments)
+    {
+        this.username = username;
+        this.password = password;
+        this.comments = comments;
+    }
+
     public long getUserid()
     {
         return userid;
@@ -105,6 +115,11 @@ public class User
     {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
+    }
+
+    public void setNoEncodePassword(String password)
+    {
+        this.password = password;
     }
 
     public Set<UserRoles> getRoles()

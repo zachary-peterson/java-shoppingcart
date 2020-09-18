@@ -49,6 +49,7 @@ public class UserController
     }
 
     // POST http://localhost:2019/users/user
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping(value = "/user", consumes = {"application/json"})
     public ResponseEntity<?> addUser(@Valid @RequestBody User newuser)
     {
